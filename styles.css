@@ -342,8 +342,8 @@ h2 {
 }
 
 h3 {
-  font-size: 30px;
-  line-height: 36px;
+  font-size: 35px;
+  line-height: 40px;
 
   padding: 0;
   margin: 0;
@@ -613,4 +613,9 @@ article.smaller q::after {
 .prettyprint .dec, 
 .prettyprint .var { /* a declaration; a variable name */
   color: rgb(127, 0, 127);
-}  
+}
+
+h1.centered {
+  width: 100%;
+  text-align: center;
+}

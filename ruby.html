@@ -2,17 +2,254 @@
 <html>
   <head>
     <title>Ruby</title>
-    <meta charset='utf-8' />
-    <script src='slides.js'></script>
-    <style>
-    </style>
+    <meta charset="utf-8" />
+    <script src="slides.js"></script>
   </head>
 
-  <body style='display: none'>
-    <section class='slides layout-regular template-flatschool'>
+  <body style="display: none">
+    <section class="slides layout-regular template-flatschool">
+      
       <article>
-        <h1>Title</h1>
-        <p>Text Text Text Text Text Text Text Text Text</p>
+        <h1 class="centered">
+          Ruby Syntax
+        </h1>
+        <div class="source">
+          Alexander Pavlenko,<br/>
+          <a href="mailto:alexander.pavlenko@flatstack.com">alexander.pavlenko@flatstack.com</a>
+          
+        </div>
+      </article>
+      
+      <article>
+        <h3>
+          Everything is an object.
+        </h3>
+        <p>
+          What is not an object, is a method call.
+        </p>
+        <pre>
+puts "Hello World!"</pre>
+        <pre>
+1 + 2</pre>
+      </article>
+      
+      <article>
+        <h3>Everything has a value.</h3>
+        <pre>
+def method
+  if nil
+    'nil'
+  else
+    'result'
+  end
+end
+@result = method</pre>
+      </article>
+      
+      <article>
+        <h3>Our friends:</h3>
+        <pre>
+[
+  [1, 2, 3],
+  1..3,
+  %w(a b c),
+  '%5s' % 'pad',
+  {
+    :user => 'Timmy',
+    :ability => :"ta-da!"
+  }
+].each do |item|
+  puts item.class, item.inspect
+end</pre>
+        <h2>And their names are…</h2>
+      </article>
+      
+      <article>
+        <h3>Object</h3>
+        <h4>Summoning</h4>
+        <pre>
+Object.new</pre>
+        <h4>Abilities</h4>
+        <ul>
+          <li>nil?</li>
+          <li>inspect</li>
+          <li>object_id</li>
+          <li>clone</li>
+          <li>tap</li>
+        </ul>
+      </article>
+      
+      <article>
+        <h3>Number</h3>
+        <h4>Summoning</h4>
+        <pre>
+1, 2, 3, 5…
+something.to_i</pre>
+        <h4>Abilities</h4>
+        <ul>
+          <li>to_s</li>
+          <li>even? or odd?</li>
+          <li>upto</li>
+          <li>downto</li>
+          <li>times</li>
+        </ul>
+      </article>
+      
+      <article>
+        <h3>Range</h3>
+        <h4>Summoning</h4>
+        <pre>
+1..5
+1...5</pre>
+        <h4>Abilities</h4>
+        <ul>
+          <li>to_a</li>
+          <li>first</li>
+          <li>last</li>
+        </ul>
+      </article>
+      
+      <article>
+        <h3>String</h3>
+        <h4>Summoning</h4>
+        <pre>
+"interpolatable #{41 + 1}"
+%Q{interpolatable #{41 + 1}}
+'as is'
+%q{as is}
+
+<<-ANYTEXT
+multiline,
+interpolatable #{41 + 1}
+ANYTEXT
+
+'Z' * 5
+'%s: %i, %i' % ['look', 4, 2, 'it\'ll be ignored']
+
+something.to_s</pre>
+      </article>
+      
+      <article>
+        <h3>String</h3>
+        <h4>Abilities</h4>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </article>
+      
+      <article>
+        <h3>Symbol</h3>
+        <h4>Summoning</h4>
+        <pre>
+:normal
+:"-W1eRd#{41 + 1}"</pre>
+        <pre>something.to_sym</pre>
+        <h4>Abilities</h4>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </article>
+      
+      <article>
+        <h3>Array</h3>
+        <h4>Summoning</h4>
+        <pre></pre>
+        <h4>Abilities</h4>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </article>
+      
+      <article>
+        <h3>Hash</h3>
+        <h4>Summoning</h4>
+        <pre></pre>
+        <h4>Abilities</h4>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </article>
+      
+      <article>
+        <h3>Class</h3>
+      </article>
+      
+      <article>
+        <h3>Module</h3>
+      </article>
+      
+      <article>
+        <h3>Block</h3>
+      </article>
+      
+      <article>
+        <h3>Iterator</h3>
+      </article>
+      
+      <article>
+        <h1 class="centered">Tools</h1>
+      </article>
+      
+      <article>
+        <h3>Interactive Ruby Shell</h3>
+        <pre>
+$ irb
+ruby-1.9.2-p290 :001 > puts 'here is it'
+here is it
+ => nil
+ruby-1.9.2-p290 :002 > 'scary
+ruby-1.9.2-p290 :003'> multiline'
+ => "scary\nmultiline"
+ruby-1.9.2-p290 :004 > exit</pre>
+      </article>
+      
+      <article>
+        <h3>Gems</h3>
+        <p>
+          Builds: <a href="http://rubygems.org/">http://rubygems.org/</a> <br/>
+          Sources: <a href="http://github.com/">http://github.com/</a>
+        </p>
+        <pre>
+$ gem install yajl-ruby
+$ irb
+ruby-1.9.2-p290 :001 > require 'yajl'
+ => true 
+ruby-1.9.2-p290 :002 > Yajl::Parser.parse('"this"')
+ => "this"
+        </pre>
+      </article>
+
+      <article>
+        <h1 class="centered">Homework</h1>
+      </article>
+      
+      <article>
+        <h3>Ruby Koans</h3>
+        <q>
+          Learn the Ruby language, syntax, structure, and some common functions and libraries.
+        </q>
+        <div class="author">
+          <a href="http://rubykoans.com/">http://rubykoans.com/</a>
+        </div>
+      </article>
+
+      <article>
+        <h3>For the further questions:</h3>
+        <p>
+          Google Groups thread:
+          <a href="https://groups.google.com/forum/#!topic/fs-courses/TLFEOJbJl6I">
+            http://goo.gl/ZFcLK
+          </a>
+        </p>
+        <h2>Thanks for the attention.</h2>
       </article>
 
     </section>
