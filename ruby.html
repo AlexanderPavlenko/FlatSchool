@@ -8,7 +8,7 @@
 
   <body style="display: none">
     <section class="slides layout-regular template-flatschool">
-      
+
       <article>
         <h1 class="centered">
           Ruby Syntax
@@ -16,10 +16,9 @@
         <div class="source">
           Alexander Pavlenko,<br/>
           <a href="mailto:alexander.pavlenko@flatstack.com">alexander.pavlenko@flatstack.com</a>
-          
         </div>
       </article>
-      
+
       <article>
         <h3>
           Everything is an object.
@@ -31,21 +30,62 @@
 puts "Hello World!"</pre>
         <pre>
 1 + 2</pre>
+<pre>
+> nil.class
+=> NilClass 
+> nil.class.superclass
+=> Object</pre>
       </article>
-      
+
+      <article>
+        <h3>Flow is under control.</h3>
+        <pre>
+if value
+  'anything'
+elsif value.nil?
+  'nil'
+else
+  'false'
+end</pre>
+         <pre>
+for i in 1.upto(5)
+  next if i == 1
+  break if i == 5
+  puts i
+end</pre>
+      </article>
+
+      <article>
+        <h3>Expression over cryptic.</h3>
+        <pre>
+unless value  # equals to: if !value
+  # value is false or nil
+   do_panic and return if value.nil?
+else
+  'your anything'
+end</pre>
+      </article>
+
+      <article>
+        <h3>Logic in logic.</h3>
+        <pre>
+&& and || or
+        </pre>
+      </article>
+
       <article>
         <h3>Everything has a value.</h3>
         <pre>
 def method
-  if nil
-    'nil'
+  if true
+    true && 'result'
   else
-    'result'
+    'this'
   end
 end
-@result = method</pre>
+result = method</pre>
       </article>
-      
+
       <article>
         <h3>Our friends:</h3>
         <pre>
@@ -63,7 +103,7 @@ end
 end</pre>
         <h2>And their names are…</h2>
       </article>
-      
+
       <article>
         <h3>Object</h3>
         <h4>Summoning</h4>
