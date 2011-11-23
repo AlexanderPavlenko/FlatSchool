@@ -47,7 +47,7 @@ elsif value.nil?
 else
   'false'
 end</pre>
-         <pre>
+        <pre>
 for i in 1.upto(5)
   next if i == 1
   break if i == 5
@@ -56,21 +56,29 @@ end</pre>
       </article>
 
       <article>
-        <h3>Expression over cryptic.</h3>
+        <h3>Flow is under control.</h3>
         <pre>
-unless value  # equals to: if !value
-  # value is false or nil
-   do_panic and return if value.nil?
-else
-  'your anything'
+case value
+when 'green'
+  :win
+when 'red'
+  :bad
+default
+  :fault
 end</pre>
       </article>
 
       <article>
-        <h3>Logic in logic.</h3>
+        <h3>Expression over cryptic.</h3>
         <pre>
-&& and || or
-        </pre>
+unless value  # equals to: if !value
+  # value is false or nil
+  do_panic and return if value.nil?
+else
+  'your anything'
+end</pre>
+        <pre>
+"hello".upcase and "hello".upcase!</pre>
       </article>
 
       <article>
@@ -116,6 +124,7 @@ Object.new</pre>
           <li>object_id</li>
           <li>clone</li>
           <li>tap</li>
+          <li>methods</li>
         </ul>
       </article>
       
@@ -173,9 +182,13 @@ something.to_s</pre>
         <h3>String</h3>
         <h4>Abilities</h4>
         <ul>
-          <li></li>
-          <li></li>
-          <li></li>
+          <li>size</li>
+          <li>empty?</li>
+          <li>upcase and downcase</li>
+          <li>lines, chars, bytes</li>
+          <li>strip</li>
+          <li>squeeze</li>
+          <li>slice</li>
         </ul>
       </article>
       
@@ -188,16 +201,19 @@ something.to_s</pre>
         <pre>something.to_sym</pre>
         <h4>Abilities</h4>
         <ul>
-          <li></li>
-          <li></li>
-          <li></li>
+          <li>==</li>
+          <li>to_proc</li>
         </ul>
       </article>
       
       <article>
         <h3>Array</h3>
         <h4>Summoning</h4>
-        <pre></pre>
+        <pre>
+%W{interpolatable strings #{41 + 1}}
+%w{strings as is}
+[item1, item2, 3, 4, 'five']
+Array.new(5) {|index| index ** index }</pre>
         <h4>Abilities</h4>
         <ul>
           <li></li>
