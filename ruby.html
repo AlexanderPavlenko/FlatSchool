@@ -182,8 +182,7 @@ something.to_s</pre>
         <h3>String</h3>
         <h4>Abilities</h4>
         <ul>
-          <li>size</li>
-          <li>empty?</li>
+          <li>size and empty?</li>
           <li>upcase and downcase</li>
           <li>lines, chars, bytes</li>
           <li>strip</li>
@@ -197,8 +196,8 @@ something.to_s</pre>
         <h4>Summoning</h4>
         <pre>
 :normal
-:"-W1eRd#{41 + 1}"</pre>
-        <pre>something.to_sym</pre>
+:"-W1eRd#{41 + 1}"
+something.to_sym</pre>
         <h4>Abilities</h4>
         <ul>
           <li>==</li>
@@ -213,47 +212,171 @@ something.to_s</pre>
 %W{interpolatable strings #{41 + 1}}
 %w{strings as is}
 [item1, item2, 3, 4, 'five']
-Array.new(5) {|index| index ** index }</pre>
+Array.new(5) {|index| index ** index }
+something.to_a</pre>
+      </article>
+
+      <article>
+        <h3>Array</h3>
         <h4>Abilities</h4>
         <ul>
-          <li></li>
-          <li></li>
-          <li></li>
+          <li>size and empty?</li>
+          <li>push, pop, shift, unshift</li>
+          <li>delete and delete_at</li>
+          <li>reverse and rotate</li>
+          <li>sort and sort_by</li>
+          <li>group_by</li>
+          <li>flatten</li>
+          <li>shuffle</li>
+          <li>| and &amp;</li>
         </ul>
       </article>
       
       <article>
         <h3>Hash</h3>
         <h4>Summoning</h4>
-        <pre></pre>
+        <pre>
+{:key => value, :key2 => value}
+method(:key => value, :key2 => value)
+Hash.new
+something.to_hash</pre>
         <h4>Abilities</h4>
         <ul>
-          <li></li>
-          <li></li>
-          <li></li>
+          <li>size and empty?</li>
+          <li>keys and values</li>
+          <li>key? or value?</li>
+          <li>merge</li>
         </ul>
       </article>
-      
+
       <article>
-        <h3>Class</h3>
+        <h3>Common «operators»</h3>
+        <ul>
+          <li><code>collection &lt;&lt; value</code></li>
+          <li><code>collection[key]</code></li>
+          <li><code>collection[key] = value</code></li>
+          <li><code>value =~ /regexp/</code></li>
+        </ul>
       </article>
-      
-      <article>
-        <h3>Module</h3>
-      </article>
-      
+
       <article>
         <h3>Block</h3>
+        <h4>From the outside.</h4>
+        <pre>
+method do |locals|
+  do_something_with locals
+end
+method {|locals| do_something_with locals }</pre>
       </article>
-      
+
+      <article>
+        <h3>Block</h3>
+        <h4>From the inside.</h4>
+        <pre>
+def method
+  value = 41 + 1
+  something_done = yield(value) if block_given?
+  value
+end</pre>
+      </article>
+
       <article>
         <h3>Iterator</h3>
+        <pre>
+collection.each do |elem|
+  do_anything_with elem
+end</pre>
+         <ul>
+           <li>each</li>
+           <li>reverse_each</li>
+           Array
+           <li>each_index, each_entry</li>
+           <li>each_with_index</li>
+           <li>each_slice</li>
+           Hash
+           <li>each_key, each_value</li>
+           <li>each_pair</li>
+         </ul>
       </article>
-      
+
+      <article>
+        <h3>Iterator</h3>
+        <pre>
+collection.inject([]) do |accumulator, elem|
+  accumulator << elem
+  accumulator
+collection.map do |elem|
+  elem.turn_into_hedgehog
+end.select do |elem|
+  elem.hedgehog?
+end.reject do |elem|
+  elem.hedgehog?
+end</pre>
+      </article>
+
+      <article>
+        <h3>Class</h3>
+        <pre>
+class Base
+  @@class_var = 1
+  @class_instance_var = 2
+  SOMETHING_STATIC = :constant
+
+  def initialize
+    @instance_var = 3
+  end
+
+  def instance_method
+    @instance_var += 1
+  end
+
+  def self.class_method
+    @class_instance_var += 1
+  end
+end</pre>
+      </article>
+
+      <article>
+        <h3>Module</h3>
+        <pre>
+module Sensible
+
+  def included(base)
+    puts base.name
+  end
+
+  def new_method
+    'result'
+  end
+end</pre>
+         <p>Tip: have a look at ActiveSupport::Concern</p>
+      </article>
+
+      <article>
+        <h3>Class</h3>
+        <pre>
+class Special < Base
+  include Sensible
+
+  def initialize
+    super
+    @instance_var *= 2
+  end
+
+  def can_this
+    @@class_var += 1
+  end
+
+  def nil_here
+    @class_instance_var
+  end
+end</pre>
+      </article>
+
       <article>
         <h1 class="centered">Tools</h1>
       </article>
-      
+
       <article>
         <h3>Interactive Ruby Shell</h3>
         <pre>
@@ -266,7 +389,7 @@ ruby-1.9.2-p290 :003'> multiline'
  => "scary\nmultiline"
 ruby-1.9.2-p290 :004 > exit</pre>
       </article>
-      
+
       <article>
         <h3>Gems</h3>
         <p>
@@ -286,14 +409,24 @@ ruby-1.9.2-p290 :002 > Yajl::Parser.parse('"this"')
       <article>
         <h1 class="centered">Homework</h1>
       </article>
-      
+
       <article>
         <h3>Ruby Koans</h3>
         <q>
           Learn the Ruby language, syntax, structure, and some common functions and libraries.
         </q>
         <div class="author">
-          <a href="http://rubykoans.com/">http://rubykoans.com/</a>
+          <a href="http://rubykoans.com/">rubykoans.com/</a>
+        </div>
+      </article>
+
+      <article>
+        <h3>Ruby Doc</h3>
+        <q>
+          <img src="images/logo-rubydoc.gif" />
+        </q>
+        <div class="author">
+          <a href="http://www.ruby-doc.org/core-1.9.2/">www.ruby-doc.org/core-1.9.2/</a>
         </div>
       </article>
 
