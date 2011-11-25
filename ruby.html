@@ -14,7 +14,7 @@
           Ruby Syntax
         </h1>
         <div class="source">
-          Alexander Pavlenko,<br/>
+          Alexander Pavlenko, <a href="http://twitter.com/Alerticus">@Alerticus</a><br/>
           <a href="mailto:alexander.pavlenko@flatstack.com">alexander.pavlenko@flatstack.com</a>
         </div>
       </article>
@@ -257,6 +257,17 @@ something.to_hash</pre>
           <li><code>collection[key] = value</code></li>
           <li><code>value =~ /regexp/</code></li>
         </ul>
+        <h2>Actually are…</h2>
+      </article>
+
+      <article>
+        <h3>Methods</h3>
+        <ul>
+          <li><code>collection.send(:&lt;&lt;, value)</code></li>
+          <li><code>collection.send(:[], key)</code></li>
+          <li><code>collection.send(:[]=, value)</code></li>
+          <li><code>value.send(:=~, /regexp/)</code></li>
+        </ul>
       </article>
 
       <article>
@@ -303,12 +314,12 @@ end</pre>
         <h3>Iterator</h3>
         <pre>
 collection.inject([]) do |accumulator, elem|
-  accumulator << elem
+  accumulator << elem.mess_it if stars_shine?
   accumulator
-collection.map do |elem|
-  elem.turn_into_hedgehog
+end.map do |elem|   # same: map(&:to_hedgehog)
+  elem.to_hedgehog  #
 end.select do |elem|
-  elem.hedgehog?
+  elem && elem.hedgehog?
 end.reject do |elem|
   elem.hedgehog?
 end</pre>
@@ -339,14 +350,21 @@ end</pre>
       <article>
         <h3>Module</h3>
         <pre>
-module Sensible
-
-  def included(base)
+module OtherModule
+  def simple; 'is simple'; end
+end
+module SomeModule
+  extend OtherModule
+  def self.included(base)
+    base.send(:extend, ClassMethods)
+    base.send(:include, InstanceMethods)
     puts base.name
   end
-
-  def new_method
-    'result'
+  module ClassMethods
+    def cm; puts 'class method'; end
+  end
+  module InstanceMethods
+    def im; puts 'instance method'; end
   end
 end</pre>
          <p>Tip: have a look at ActiveSupport::Concern</p>
@@ -356,19 +374,19 @@ end</pre>
         <h3>Class</h3>
         <pre>
 class Special < Base
-  include Sensible
-
+  include SomeModule
   def initialize
     super
     @instance_var *= 2
   end
-
   def can_this
     @@class_var += 1
   end
-
   def nil_here
     @class_instance_var
+  end
+  def error_here
+    @@uninitialized_class_var
   end
 end</pre>
       </article>
