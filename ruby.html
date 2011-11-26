@@ -31,6 +31,8 @@ puts "Hello World!"</pre>
         <pre>
 1 + 2</pre>
 <pre>
+> 1.class
+=> Fixnum
 > nil.class
 => NilClass 
 > nil.class.superclass
@@ -39,7 +41,8 @@ puts "Hello World!"</pre>
 
       <article>
         <h3>Flow is under control.</h3>
-        <pre>
+        <div class="build">
+          <pre>
 if value
   'anything'
 elsif value.nil?
@@ -47,17 +50,7 @@ elsif value.nil?
 else
   'false'
 end</pre>
-        <pre>
-for i in 1.upto(5)
-  next if i == 1
-  break if i == 5
-  puts i
-end</pre>
-      </article>
-
-      <article>
-        <h3>Flow is under control.</h3>
-        <pre>
+          <pre>
 case value
 when 'green'
   :win
@@ -66,19 +59,46 @@ when 'red'
 default
   :fault
 end</pre>
+        </div>
+      </article>
+
+      <article>
+        <h3>Flow is under control.</h3>
+        <div class="build">
+          <pre>
+for i in 1.upto(5)
+  next if i == 1
+  break if i == 5
+  puts i
+end</pre>
+          <pre>
+while str = gets
+  if str.strip == 'stop this!'
+    puts 'sorry'
+    break
+  end
+  puts str
+end</pre>
+        </div>
       </article>
 
       <article>
         <h3>Expression over cryptic.</h3>
-        <pre>
+        <div class="build">
+          <pre>
 unless value  # equals to: if !value
   # value is false or nil
   do_panic and return if value.nil?
 else
   'your anything'
 end</pre>
-        <pre>
+          <pre>
 "hello".upcase and "hello".upcase!</pre>
+          <pre>
+one, two, three = 1, 2, 3
+one, two = two, one
+one = two = three</pre>
+        </div>
       </article>
 
       <article>
@@ -272,23 +292,25 @@ something.to_hash</pre>
 
       <article>
         <h3>Block</h3>
-        <h4>From the outside.</h4>
-        <pre>
+        <div class="build">
+          <div>
+            <h4>From the outside.</h4>
+            <pre>
 method do |locals|
   do_something_with locals
 end
 method {|locals| do_something_with locals }</pre>
-      </article>
-
-      <article>
-        <h3>Block</h3>
-        <h4>From the inside.</h4>
-        <pre>
+          </div>
+          <div>
+            <h4>From the inside.</h4>
+            <pre>
 def method
   value = 41 + 1
   something_done = yield(value) if block_given?
   value
 end</pre>
+          </div>
+        </div>
       </article>
 
       <article>
@@ -300,11 +322,11 @@ end</pre>
          <ul>
            <li>each</li>
            <li>reverse_each</li>
-           Array
+           <strong>Array</strong>
            <li>each_index, each_entry</li>
            <li>each_with_index</li>
            <li>each_slice</li>
-           Hash
+           <strong>Hash</strong>
            <li>each_key, each_value</li>
            <li>each_pair</li>
          </ul>
@@ -332,6 +354,7 @@ class Base
   @@class_var = 1
   @class_instance_var = 2
   SOMETHING_STATIC = :constant
+  attr_accessor :instance_var
 
   def initialize
     @instance_var = 3
@@ -388,6 +411,28 @@ class Special < Base
   def error_here
     @@uninitialized_class_var
   end
+end</pre>
+      </article>
+
+      <article>
+        <h3>Exceptions handling</h3>
+        <pre>
+def method
+  all_bad = true
+  begin
+    raise Exception.new('error in block') if all_bad
+    puts 'ok, block done'
+  rescue Exception => ex
+    puts ex.message
+    all_bad = false
+    retry
+  ensure
+    puts 'finalizer'
+    raise 'ops!'
+  end
+  puts 'unreachable'
+rescue => ex
+  puts "#{ex.class}: #{ex.message}"
 end</pre>
       </article>
 
