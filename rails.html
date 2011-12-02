@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ruby</title>
+    <title>Ruby on Rails</title>
     <meta charset="utf-8" />
     <script src="slides.js"></script>
   </head>
@@ -153,7 +153,32 @@
       </article>
 
       <article>
-        <h1>ActionController</h1>
+        <h3>Routes</h3>
+        <pre>
+resources :items</pre>
+        <div class="build">
+          <pre>
+resources :items do
+  member do
+    get :related
+  end
+  collection do
+    get :popular
+  end
+end</pre>
+          <pre>
+resource :profile</pre>
+          <pre>
+match 'some/path/:id/view' => 'catalog#view', :as => :view_catalog</pre>
+          <p>
+            Tip: Read default config/routes.rb file<br/>
+            Tip: <a href="http://guides.rubyonrails.org/routing.html">guides.rubyonrails.org/routing.html</a>
+          </p>
+        </div>
+      </article>
+
+      <article>
+        <h1 class="centered">ActionController</h1>
       </article>
 
       <article>
@@ -183,44 +208,215 @@ end</pre>
 class ApplicationController2 < ApplicationController
 
   prepend_before_filter :before_before
-  skip_after_filter :after
+  skip_after_filter :after, :if => :something
 
   private
 
   def before_before; puts 'before before'; end
+
+  def something; true or false; end
 end</pre>
       </article>
 
       <article>
-        <h3></h3>
+        <h3>Environment</h3>
+        <ul>
+          <li>request</li>
+          <li>response</li>
+          <li>params</li>
+          <li>session</li>
+          <li>cookies</li>
+          <li>flash</li>
+        </ul>
       </article>
 
       <article>
-        <h3></h3>
+        <h3>Slim controllers, fat models</h3>
+        <ul>
+          <li>Action should not have any business logic</li>
+          <li>Action should have minimal number of calls to the model</li>
+          <li>Use <code>rescue_from</code> for exceptions handling</li>
+        </ul>
       </article>
 
       <article>
-        <h3></h3>
+        <h3>Do not even try to reinvent bicycle</h3>
+        <ul>
+          <li>Users management: <a href="http://github.com/plataformatec/devise">devise</a></li>
+          <li>OAuth authentication: <a href="http://github.com/intridea/omniauth">omniauth</a></li>
+          <li>Roles and permissions:  <a href="http://github.com/ryanb/cancan">cancan</a></li>
+        </ul>
       </article>
 
       <article>
-        <h3></h3>
+        <h1 class="centered">ActionView</h1>
       </article>
 
       <article>
-        <h3></h3>
+        <h3>Instance variables</h3>
+        <p>
+          Controller instance variables are available in views too.
+          So that if you set @user in controller action, you are able
+          to render @user.name at your template.
+        </p>
       </article>
 
       <article>
-        <h3></h3>
+        <h3>Template engines</h3>
+        <ul>
+          <li><a href="http://www.ruby-doc.org/stdlib-1.9.2/libdoc/erb/rdoc/ERB.html">ERB</a></li>
+          <li><a href="http://haml-lang.com/">Haml</a></li>
+          <li><a href="http://slim-lang.com/">Slim</a></li>
+          <li><a href="http://mustache.github.com/">Mustache</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Break down everything</h3>
+        <ul>
+          <li>Layout</li>
+          <li>Partial</li>
+          <li>Nested Layout</li>
+          <li>Partial Layout</li>
+        </ul>
+        <p>
+          Tip: <a href="http://guides.rubyonrails.org/layouts_and_rendering.html">guides.rubyonrails.org/layouts_and_rendering.html</a>
+        </p>
+      </article>
+
+      <article>
+        <h1 class="centered">ActiveRecord</h1>
+      </article>
+
+      <article>
+        <h3>Associations</h3>
+        <ul>
+          <li>1:1</li>
+          <li>1:M</li>
+          <li>M:M</li>
+        </ul>
+        <br/>
+        <div class="build">
+          <ul>
+            <li>has_one</li>
+            <li>has_many</li>
+            <li>belongs_to</li>
+            <li>has_and_belongs_to_many</li>
+          </ul>
+          <p>
+            Tip: <a href="http://guides.rubyonrails.org/association_basics.html">guides.rubyonrails.org/association_basics.html</a>
+          </p>
+        </div>
+      </article>
+
+      <article>
+        <h3>has_one</h3>
+        <ul>
+          <li>Current object has no foreign key</li>
+          <li>There are 0..1 objects referencing current</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>has_many</h3>
+        <ul>
+          <li>Current object has no foreign key</li>
+          <li>There are 0..ꝏ objects referencing current</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>belongs_to</h3>
+        <ul>
+          <li>Current object has foreign key</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>has_and_belongs_to_many</h3>
+        <ul>
+          <li>Neither current object, nor target object has foreign key</li>
+          <li>There are additional table with foreign keys cross-link</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>has_one :through and has_many :through</h3>
+        <ul>
+          <li>If A has_one B, and B has_one C, that means A has_one C :through B</li>
+          <li>If A has_one or has_many B, and B has_one or has_many C, that means A has_many C :through B</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Query Interface</h3>
+        <ul>
+          <li>where</li>
+          <li>select</li>
+          <li>group</li>
+          <li>order</li>
+          <li>limit</li>
+          <li>offset</li>
+        </ul>
+        <p>
+          Tip: <a href="http://guides.rubyonrails.org/active_record_querying.html">guides.rubyonrails.org/active_record_querying.html</a>
+        </p>
+      </article>
+
+      <article>
+        <h3>Scopes</h3>
+        <pre>
+class Resource < ActiveRecord::Base
+  scope :active, where(:active => true)
+  scope :latest, order('created_at desc').limit(50)
+end
+
+Resource.active.latest</pre>
+        <p>
+          Great for logic and adapter-specific SQL encapsulation.
+        </p>
+      </article>
+
+      <article>
+        <h3>Callbacks</h3>
+        <ul>
+          <li>before_validation, after_validation</li>
+          <li>before_save, around_save, after_save</li>
+          <li>before_create, around_create, after_create</li>
+          <li>before_update, around_update, after_update</li>
+          <li>before_destroy, around_destroy, after_destroy</li>
+          <li>after_commit, after_rollback</li>
+        </ul>
+      </article>
+
+      <article>
+        <h1 class="centered">Security</h1>
+      </article>
+
+      <article>
+        <q>No user input data is secure, until proven otherwise, and every parameter from the user is potentially manipulated.</q>
+        <div class="author">
+          <a href="http://guides.rubyonrails.org/security.html">guides.rubyonrails.org/security.html</a>
+        </div>
+      </article>
+
+      <article>
+        <h1 class="centered">Homework</h1>
+      </article>
+
+      <article>
+        <ol>
+          <li>Read mentioned articles.</li>
+          <li>Be nice :)</li>
+        </ol>
       </article>
 
       <article>
         <h3>For the further questions:</h3>
         <p>
           Google Groups thread:
-          <a href="https://groups.google.com/forum/#!topic/fs-courses/TLFEOJbJl6I">
-            http://goo.gl/ZFcLK
+          <a href="https://groups.google.com/forum/#!topic/fs-courses/RMWt61oSFB0">
+            http://goo.gl/MMcmR
           </a>
         </p>
         <h2>Thanks for the attention.</h2>
