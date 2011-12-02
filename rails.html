@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ruby</title>
+    <meta charset="utf-8" />
+    <script src="slides.js"></script>
+  </head>
+
+  <body style="display: none">
+    <section class="slides layout-regular template-flatschool">
+
+      <article>
+        <h1 class="centered">
+          Ruby on Rails
+        </h1>
+        <div class="source">
+          Alexander Pavlenko, <a href="http://twitter.com/Alerticus">@Alerticus</a><br/>
+          <a href="mailto:alexander.pavlenko@flatstack.com">alexander.pavlenko@flatstack.com</a>
+        </div>
+      </article>
+
+      <article>
+        <h3>Modularity</h3>
+        <ul>
+          <li>ActionPack</li>
+          <li>ActiveModel</li>
+          <li>ActiveRecord</li>
+          <li>ActiveResource</li>
+          <li>ActiveSupport</li>
+          <li>ActionMailer</li>
+          <li>Railties</li>
+          <li>Bundler</li>
+          <li>Rack</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>ActionPack</h3>
+        <p>From request to response</p>
+        <ul>
+          <li>ActionDispatch</li>
+          <li>ActionController</li>
+          <li>ActionView</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>ActiveModel</h3>
+        <p>Logic encapsulation</p>
+        <ul>
+          <li>Attributes</li>
+          <li>Validation</li>
+          <li>Observing</li>
+          <li>Callbacks</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>ActiveRecord</h3>
+        <p>Data persistence</p>
+        <ul>
+          <li>Object-relational mapping</li>
+          <li>Query building</li>
+          <li>Associations</li>
+          <li>Transactions</li>
+          <li>Scheme migrations</li>
+          <li>Database connection adapters</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>ActiveResource</h3>
+        <p>For all RESTful goods</p>
+        <ul>
+          <li>Connection to remote services</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>ActiveSupport</h3>
+        <p>Nuts and bolts</p>
+        <ul>
+          <li>Caching</li>
+          <li>Dependencies autoload</li>
+          <li>Deprecation</li>
+          <li>Core extensions</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>ActionMailer</h3>
+        <p>Keeping in touch</p>
+        <ul>
+          <li>Emails sending</li>
+          <li>Emails receiving</li>
+          <li>Templates</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Railties</h3>
+        <p>Tying all together (predictably)</p>
+        <ul>
+          <li>Gems and Engines initialization</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Bundler</h3>
+        <p>Defining environment</p>
+        <ul>
+          <li>List gems and their versions</li>
+          <li>Require listed gems</li>
+          <li>Cache gems locally</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Rack</h3>
+        <p>Origin of requests</p>
+        <ul>
+          <li>Common interface to web-server</li>
+        </ul>
+      </article>
+
+      <article>
+        <h1 class="centered">REST</h1>
+        <p class="centered"><sup>*</sup>Representational State Transfer</p>
+      </article>
+
+      <article>
+        <h3>HTTP verbs</h3>
+        <ul>
+          <li>GET</li>
+          <li>POST</li>
+          <li>PUT</li>
+          <li>DELETE</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Resource</h3>
+        <ul>
+          <li><code>index&nbsp;&nbsp;: GET /items/</code></li>
+          <li><code>show&nbsp;&nbsp;&nbsp;: GET /items/item</code></li>
+          <li><code>new&nbsp;&nbsp;&nbsp;&nbsp;: GET /items/new</code></li>
+          <li><code>create&nbsp;: POST /items/</code></li>
+          <li><code>edit&nbsp;&nbsp;&nbsp;: GET /items/item/edit</code></li>
+          <li><code>update&nbsp;: PUT /items/item</code></li>
+          <li><code>destroy: DELETE /items/item</code></li>
+        </ul>
+        <p>Where <code>items</code> and <code>item</code> are collection and collection element identifiers</p>
+      </article>
+
+      <article>
+        <h1>ActionController</h1>
+      </article>
+
+      <article>
+        <h3>Action filters</h3>
+        <pre>
+class ApplicationController < ActionController::Base
+
+  before_filter :before
+  after_filter :after
+  around_filter :around
+
+  private
+
+  def before; puts 'before'; end
+  def after; puts 'after'; end
+  def around
+    puts 'before around'
+    yield
+    puts 'after around'
+  end
+end</pre>
+      </article>
+
+      <article>
+        <h3>Action filters</h3>
+        <pre>
+class ApplicationController2 < ApplicationController
+
+  prepend_before_filter :before_before
+  skip_after_filter :after
+
+  private
+
+  def before_before; puts 'before before'; end
+end</pre>
+      </article>
+
+      <article>
+        <h3></h3>
+      </article>
+
+      <article>
+        <h3></h3>
+      </article>
+
+      <article>
+        <h3></h3>
+      </article>
+
+      <article>
+        <h3></h3>
+      </article>
+
+      <article>
+        <h3></h3>
+      </article>
+
+      <article>
+        <h3></h3>
+      </article>
+
+      <article>
+        <h3>For the further questions:</h3>
+        <p>
+          Google Groups thread:
+          <a href="https://groups.google.com/forum/#!topic/fs-courses/TLFEOJbJl6I">
+            http://goo.gl/ZFcLK
+          </a>
+        </p>
+        <h2>Thanks for the attention.</h2>
+      </article>
+
+    </section>
+  </body>
+</html>

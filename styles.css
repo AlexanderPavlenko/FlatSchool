@@ -615,7 +615,7 @@ article.smaller q::after {
   color: rgb(127, 0, 127);
 }
 
-h1.centered {
+h1.centered, p.centered {
   width: 100%;
   text-align: center;
 }
